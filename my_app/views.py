@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 from . import models
 
-BASE_CRAIGSLIST_URL = 'https://osaka.craigslist.org/search/?query={}'
+BASE_CRAIGSLIST_URL = 'https://tokyo.craigslist.org/search/jjj?query={}'
 BASE_IMAGE_URL = 'https://images.craigslist.org/{}_300x300.jpg'
 
 
@@ -32,13 +32,13 @@ def new_search(request):
         if post.find(class_='result-price'):
             post_price = post.find(class_='result-price').text
         else:
-            post_price = 'N/A'
+            post_price = 'Free'
 
         if post.find(class_='result-image').get('data-ids'):
             post_image_id = post.find(class_='result-image').get('data-ids').split(',')[0].split(':')[1]
             post_image_url = BASE_IMAGE_URL.format(post_image_id)
         else:
-            post_image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkGJ78YvsRFryFtR0bZNwMIhFvWGFFnpX3w4cms-TtDc2GpxRn&usqp=CAU'
+            post_image_url = 'https://craigslist.org/images/peace.jpg'
 
         final_postings.append((post_title, post_url, post_price, post_image_url))
 
